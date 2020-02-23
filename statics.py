@@ -1,0 +1,1 @@
+suf_map = ['matyears', 'moneyness', 'normalizediv']
