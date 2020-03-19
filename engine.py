@@ -4,6 +4,34 @@ import numpy as np
 from statics import *
 from utils import *
 from sklearn.decomposition import PCA
+import numpy.polynomial as npbasis
+from plots import *
+
+class Basis:
+    '''
+    Class to handle basis functions
+    '''
+    def __init__(self,balen):
+        '''
+        :param balen: Max number of basis functions to use in the sequence
+        '''
+        if np.sqrt(balen) - round(np.sqrt(balen),0) > 0:
+            raise ValueError("Basis Truncation Length Must be a Perfect Square")
+        self.balen = balen
+        self.badim = np.sqrt(balen)
+
+    def get_one_bas(self,n):
+        '''
+        Get the nth basis function
+        :param n: index for basis function
+        :return: nth basis function
+        '''
+        if n > self.balen:
+            raise ValueError("Function index is larger than maximum")
+        bacof = np.zeros(self.balen)
+        bacof[n-1] = 1
+        bacof = bacof.reshape((self.badim,self.badim))
+        return lambda x,y : npbasis.laguerre.lagval2d(x,y,bacof)
 
 class VolSurf:
     '''
@@ -19,10 +47,13 @@ class VolSurf:
         self.histvols = defaultdict(list)
         self.dates = []
         self.contracts = []
+        self.maxcont = {}
+        self.mincont = {}
         self.load_vols(vpath)
         self.h1 = h1
         self.h2 = h2
         self.pca = None
+
 
     def nwInterp(self,strike,mat,dat):
         '''
@@ -45,7 +76,11 @@ class VolSurf:
         :param vpath: Path to the csv file
         :return: Nothing, sets an instance variable
         '''
-        raw = pd.read_csv(vpath).sort_values(by=['date'])
+        raw = pd.read_csv(vpath).sort_values(by=['date'], ascending=True)
+        tempmin = raw.min(); tempmax = raw.max()
+        for s in suf_map:
+            self.mincont[s] = tempmin[s]
+            self.maxcont[s] = tempmax[s]
         mask = (raw['call/put'] != 'C') | (raw['moneyness'] != 1)
         self.dates = list(raw['date'].unique())
         raw = raw[mask].to_dict('records')
@@ -72,9 +107,10 @@ class VolSurf:
         :return: None
         '''
         pca = PCA(n_components=n)
-        tempvols = np.transpose(self.histvols)
-        tempvols = np.diff(tempvols,axis=0)/tempvols[1:]
-        pca.fit(tempvols)
+        tempvols = np.diff(self.histvols,axis=1)/self.histvols[:,:-1]
+        tempvols = (tempvols-np.mean(tempvols,axis=0))/np.std(tempvols,axis=0)
+        tempvols = np.cov(tempvols)
+        pca.fit(np.transpose(tempvols))
         self.pca = pca
         return None
 
@@ -99,19 +135,12 @@ class VolSurf:
 
 
 if __name__ == '__main__':
-    pca_factors = 4; graph_scn = 'pca2'
-    mySurf = VolSurf('data_download.csv',h1=0.5,h2=0.5)
+    mySurf = VolSurf('data_download.csv',h1=0.1,h2=0.1)
+    pca_factors = 4; graph_scn = 'pca3'#mySurf.dates[0]
     mySurf.get_pca(pca_factors)
     mySurf.map_pca()
-    tim = np.linspace(0.05,4,30)
-    money = np.linspace(0.5,1.5,30)
-    tim, money = np.meshgrid(tim,money)
-    vecfunc = np.vectorize(mySurf.nwInterp)
-    ivs = vecfunc(money,tim,graph_scn)
-    import matplotlib.pyplot as plt
-    from mpl_toolkits.mplot3d import Axes3D
-    fig = plt.figure()
-    ax = fig.gca(projection='3d')
-    ax.plot_surface(tim,money,ivs)
-    plt.plot()
+
+    #plt_surf(mySurf,graph_scn)
+
+    plt_importance(mySurf)
     print("Done")
