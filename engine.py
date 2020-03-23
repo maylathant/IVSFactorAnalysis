@@ -132,6 +132,17 @@ class VolSurf:
                 self.myvols[('pca' + str(n), field)] \
                     = np.array(self.myvols[('pca' + str(n), field)])
 
+        def proj_fact():
+            '''
+            Project PCA factors onto a time series of implied vols
+            :return: An nxt array where n is the number of PCA factors and t
+            is the number of time series points
+            '''
+            if self.pca is None:
+                print('Error: Must Run get_pca() before proj_fact()')
+                exit(1)
+            return np.matmul(self.pca.components_,mySurf.histvols)
+
 
 
 if __name__ == '__main__':
