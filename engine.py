@@ -6,6 +6,7 @@ from utils import *
 from sklearn.decomposition import PCA
 import numpy.polynomial as npbasis
 from plots import *
+from operator import itemgetter
 
 class Basis:
     '''
@@ -45,6 +46,7 @@ class VolSurf:
         '''
         self.myvols = defaultdict(list)
         self.histvols = defaultdict(list)
+        self.diff_dates = defaultdict(list)
         self.dates = []
         self.contracts = []
         self.maxcont = {}
@@ -55,19 +57,21 @@ class VolSurf:
         self.pca = None
 
 
-    def nwInterp(self,strike,mat,dat):
+    def nwInterp(self,strike,mat,dat,diff=False):
         '''
         Computes the Nadaraya-Watson interpolation for a point on the vol surface
         :param strike: Moneyness of the interp point
         :param mat: Maturity in years of the interp point
         :param dat: Date for which to reference for interpolation
+        :param diff: If true, use vol % differences instead of volatility quote
         :return: Implied vol for a strike and maturity
         '''
+        interp_vol = self.diff_dates if diff else self.myvols
         #Compute difference to reference
-        matdiff = self.myvols[(dat,'matyears')] - mat
-        strdiff = self.myvols[(dat, 'moneyness')] - strike
+        matdiff = interp_vol[(dat,'matyears')] - mat
+        strdiff = interp_vol[(dat, 'moneyness')] - strike
         denom = sum(gfunc(matdiff,strdiff,self.h1,self.h2))
-        num = np.inner(self.myvols[(dat, 'normalizediv')],gfunc(matdiff,strdiff,self.h1,self.h2))
+        num = np.inner(interp_vol[(dat, 'normalizediv')],gfunc(matdiff,strdiff,self.h1,self.h2))
         return num/denom
 
     def load_vols(self,vpath):
@@ -86,19 +90,29 @@ class VolSurf:
         raw = raw[mask].to_dict('records')
         full_dates = defaultdict(list)
         histo = defaultdict(list)
+        diff_dates = defaultdict(list)
         for ele in raw:
             for field in suf_map:
                 full_dates[(ele['date'],field)].append(ele[field])
             histo[(ele['moneyness'],ele['matyears'])].append(ele['normalizediv'])
-        #Change format to numpy array
-        for ele in full_dates:
-            full_dates[ele] = np.array(full_dates[ele])
         self.contracts = list(histo.keys())
         mysurface = np.empty((len(self.dates),))
         for ele in histo:
             mysurface = np.vstack([mysurface,histo[ele]])
+        temp_dates = mysurface[1:] #Format changes in surface
+        temp_dates = np.diff(temp_dates, axis=1) / temp_dates[:, :-1]
+        for date in range(len(self.dates)-1):
+            for cont in range(len(self.contracts)):
+                diff_dates[(self.dates[date], 'moneyness')].append(self.contracts[cont][0])
+                diff_dates[(self.dates[date],'matyears')].append(self.contracts[cont][1])
+                diff_dates[(self.dates[date],'normalizediv')].append(temp_dates[cont][date])
+        #Change format to numpy array
+        for ele in full_dates:
+            full_dates[ele] = np.array(full_dates[ele])
+            diff_dates[ele] = np.array(diff_dates[ele])
         self.myvols = full_dates
         self.histvols = mysurface[1:]
+        self.diff_dates = diff_dates
 
     def get_pca(self,n : int):
         '''
@@ -132,15 +146,29 @@ class VolSurf:
                 self.myvols[('pca' + str(n), field)] \
                     = np.array(self.myvols[('pca' + str(n), field)])
 
+    def proj_fact(self):
+        '''
+        Project PCA factors onto a time series of implied vols
+        :return: An nxt array where n is the number of PCA factors and t
+        is the number of time series points
+        '''
+        if self.pca is None:
+            print('Error: Must Run get_pca() before proj_fact()')
+            exit(1)
+        return np.matmul(self.pca.components_,mySurf.histvols)
+
 
 
 if __name__ == '__main__':
     mySurf = VolSurf('data_download.csv',h1=0.1,h2=0.1)
-    pca_factors = 4; graph_scn = 'pca3'#mySurf.dates[0]
+    pca_factors = 4; graph_scn = mySurf.dates[146] #'pca3'
     mySurf.get_pca(pca_factors)
     mySurf.map_pca()
 
-    #plt_surf(mySurf,graph_scn)
+    plt_surf(mySurf,graph_scn,True,save=False)
 
-    plt_importance(mySurf)
+    #plt_importance(mySurf)
+
+    plt_proj_time(mySurf,pca_factors)
+
     print("Done")
