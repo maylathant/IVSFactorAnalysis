@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
-def plt_surf(mySurf, graph_scn,diff=False,save=False):
+def plt_surf(mySurf, graph_scn,diff=False,save=False,title=None):
     '''
     Surface plot for an implied volatility surface for a particular scenario or date
     :param mySurf: VolSurf object
@@ -20,6 +20,8 @@ def plt_surf(mySurf, graph_scn,diff=False,save=False):
     ax = fig.gca(projection='3d')
     ax.plot_surface(money,tim,ivs)
     ax.view_init(30,60)
+    if title is not None:
+        plt.title(title)
     if save:
         plt.savefig(str(graph_scn) + '.pdf')
     plt.show()

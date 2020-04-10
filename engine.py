@@ -161,14 +161,16 @@ class VolSurf:
 
 if __name__ == '__main__':
     mySurf = VolSurf('data_download.csv',h1=0.1,h2=0.1)
-    pca_factors = 4; graph_scn = mySurf.dates[146] #'pca3'
+    pca_factors = 4; graph_scn = 'pca3'
     mySurf.get_pca(pca_factors)
     mySurf.map_pca()
 
-    plt_surf(mySurf,graph_scn,True,save=False)
+    for i in range(pca_factors): #Plot surfaces of volatility factors
+        graph_scn = 'pca' + str(i)
+        plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
 
-    #plt_importance(mySurf)
+    plt_importance(mySurf) #Plot importance of each factor
 
-    plt_proj_time(mySurf,pca_factors)
+    plt_proj_time(mySurf,pca_factors) #Plot time series of factor magnitude
 
     print("Done")
