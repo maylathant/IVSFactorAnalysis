@@ -3,7 +3,7 @@
 
 Launch the file "engine.py" to start the demo. You will see surface plots for the four most significant principal components for S&P500 implied volatility over year 2019. The script also displays the relative significants of each factor and how the factors move over time.
 
-### To run the Demo, Navigate to the Folder where the files are saved in a terminal and run "python engine.py"
+### To run the Demo, Navigate to the Folder where the files are saved in a terminal and type "python engine.py"
 
 ### Required Packages
 - pandas==0.24.2
