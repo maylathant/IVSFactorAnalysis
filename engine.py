@@ -160,11 +160,16 @@ class VolSurf:
 
 
 if __name__ == '__main__':
+    print('Welcome to the Volatility Surfice PCA Demo!')
+    print('You will see surface plots of the most significant volatility factors in 2019.\n'
+          ' These will appear in Sepereate Windows.\n')
+    input("Press Enter to continue...")
+    print('Computing...')
     mySurf = VolSurf('data_download.csv',h1=0.1,h2=0.1)
     pca_factors = 4; graph_scn = 'pca3'
     mySurf.get_pca(pca_factors)
     mySurf.map_pca()
-
+    print('Rendering Graphs...')
     for i in range(pca_factors): #Plot surfaces of volatility factors
         graph_scn = 'pca' + str(i)
         plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
@@ -173,4 +178,4 @@ if __name__ == '__main__':
 
     plt_proj_time(mySurf,pca_factors) #Plot time series of factor magnitude
 
-    print("Done")
+    print("Done!")
