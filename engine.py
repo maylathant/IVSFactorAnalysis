@@ -114,16 +114,18 @@ class VolSurf:
         self.histvols = mysurface[1:]
         self.diff_dates = diff_dates
 
-    def get_pca(self,n : int):
+    def get_pca(self,n : int, cov=True):
         '''
         Compute an sklean pca object for the historical vol surface
         :param n: (int) Number of factors in PCA
+        :param cov: (bool) If True, apply covatiance matric
         :return: None
         '''
-        pca = PCA(n_components=n)
+        pca = PCA(n_components=n,svd_solver='arpack')
         tempvols = np.diff(self.histvols,axis=1)/self.histvols[:,:-1]
         tempvols = (tempvols-np.mean(tempvols,axis=0))/np.std(tempvols,axis=0)
-        tempvols = np.cov(tempvols)
+        if cov:
+            tempvols = np.cov(tempvols)
         pca.fit(np.transpose(tempvols))
         self.pca = pca
         return None
@@ -146,17 +148,19 @@ class VolSurf:
                 self.myvols[('pca' + str(n), field)] \
                     = np.array(self.myvols[('pca' + str(n), field)])
 
-    def proj_fact(self):
+    def proj_fact(self,diff=False):
         '''
         Project PCA factors onto a time series of implied vols
+        :param diff: Wheather to work with differences in vols or not
         :return: An nxt array where n is the number of PCA factors and t
         is the number of time series points
         '''
         if self.pca is None:
             print('Error: Must Run get_pca() before proj_fact()')
             exit(1)
-        return np.matmul(self.pca.components_,mySurf.histvols)
-
+        if diff:
+            return np.matmul(self.pca.components_, np.diff(self.histvols,axis=1))
+        return np.matmul(self.pca.components_,self.histvols)
 
 
 if __name__ == '__main__':
@@ -166,16 +170,20 @@ if __name__ == '__main__':
     input("Press Enter to continue...")
     print('Computing...')
     mySurf = VolSurf('data_download.csv',h1=0.1,h2=0.1)
-    pca_factors = 4; graph_scn = 'pca3'
-    mySurf.get_pca(pca_factors)
+    pca_factors = 188; graph_scn = ['pca' + str(i) for i in range(pca_factors)]
+    mySurf.get_pca(pca_factors,cov=True)
     mySurf.map_pca()
     print('Rendering Graphs...')
-    for i in range(pca_factors): #Plot surfaces of volatility factors
-        graph_scn = 'pca' + str(i)
-        plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
-
-    plt_importance(mySurf) #Plot importance of each factor
-
-    plt_proj_time(mySurf,pca_factors) #Plot time series of factor magnitude
+    title = ['PCA Factor ' + str(i) for i in range(1,pca_factors+1)]
+    colors = ['blue','orange','green','red']
+    plt_surf_mult(mySurf,graph_scn,title=title,color=colors)
+    # for i in range(pca_factors): #Plot surfaces of volatility factors
+    #     graph_scn = 'pca' + str(i)
+    #     plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
+    #
+    #plt_importance(mySurf) #Plot importance of each factor
+    #
+    # plt_proj_time(mySurf,pca_factors,save=True,title='projected_factors.png') #Plot time series of factor magnitude
+    #plt_surf(mySurf, 'pca187', diff=False, save=True, title='Volatility Plot for Factor ' + str(188))
 
     print("Done!")

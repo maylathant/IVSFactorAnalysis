@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8054bb1e-0e3b-46c9-a721-6d61b7eb8c73" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/factorimportance.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/factorimportance.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots.py" beforeDir="false" afterPath="$PROJECT_DIR$/plots.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,13 +17,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="180" column="16" selection-start-line="180" selection-start-column="16" selection-end-line="180" selection-end-column="16" />
+            <state relative-caret-position="112">
+              <caret line="175" selection-start-line="175" selection-end-line="175" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Backtester.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="111">
+              <caret line="146" column="33" lean-forward="true" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -28,8 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/plots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+            <state relative-caret-position="1141">
+              <caret line="117" column="98" selection-start-line="117" selection-start-column="98" selection-end-line="117" selection-end-column="98" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -41,7 +57,7 @@
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="135">
-              <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+              <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -66,6 +82,16 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>prev_date</find>
+      <find>mycont</find>
+      <find>proj</find>
+      <find>histvols</find>
+      <find>proj_fact</find>
+      <find>plot_are</find>
+      <find>plt_s</find>
+      <find>plot_area_pnl</find>
+      <find>self.pca</find>
+      <find>Backtester</find>
+      <find>cache_cont</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -76,13 +102,14 @@
       <list>
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/plots.py" />
+        <option value="$PROJECT_DIR$/Backtester.py" />
         <option value="$PROJECT_DIR$/engine.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="145" />
-    <option name="y" value="23" />
+    <option name="x" value="60" />
+    <option name="y" value="24" />
     <option name="width" value="1235" />
     <option name="height" value="737" />
   </component>
@@ -91,7 +118,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -103,6 +129,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -122,6 +149,27 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.engine">
+    <configuration name="Backtester" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="IVSFactorAnalysis" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Backtester.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="engine" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="IVSFactorAnalysis" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -167,10 +215,12 @@
     <list>
       <item itemvalue="Python.engine" />
       <item itemvalue="Python.plots" />
+      <item itemvalue="Python.Backtester" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.engine" />
+        <item itemvalue="Python.Backtester" />
         <item itemvalue="Python.plots" />
       </list>
     </recent_temporary>
@@ -189,22 +239,22 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="145" y="23" width="1235" height="737" extended-state="0" />
+    <frame x="60" y="24" width="1235" height="737" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18945634" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32868218" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32868218" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49835256" weight="0.32868218" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49752882" visible="true" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50247115" side_tool="true" weight="0.4" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -212,62 +262,142 @@
     </layout>
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/plots.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backtester.py</url>
+          <line>184</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backtester.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Backtester.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/engine.py</url>
+          <line>175</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
+        <watch expression="self.myrands.copy()" />
         <watch expression="mySurf.proj_fact()" language="Python" />
-        <watch expression="np.dot(mySurf.pca.components_[0],mySurf.pca.components_[2])" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
+    <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>self.pos[:,0] = 1</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.pos = self.myrands.copy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.pos[0,:] = self.myrands.copy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.pos[0,:] = 1</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.myrands.copy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>pos = myBT.myrands.copy()
+pos[:,0] = pos[:,0]*myBT.mycontw
+pos[:,0] = 1000000*pos[:,0]/sum(pos[:,0])</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>invest = 1000000
+pos = myBT.myrands.copy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>pos = myBT.myrands.copy()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>pos = myBT.myrands.copy()
+pos[0][0] = 1000</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+    </expressions>
     <expressions id="watch">
-      <expression>
-        <expression-string>np.dot(mySurf.pca.components_[0],mySurf.pca.components_[2])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>np.dot(mySurf.pca.components_[0],mySurf.pca.components_[0])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>np.dot(mySurf.pca.components_[0],mySurf.pca.components_[1])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>mySurf.pca.components_[0]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>mySurf.pca.components_</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
       <expression>
         <expression-string>mySurf.proj_fact()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>self.dates</expression-string>
+        <expression-string>self.pca.transform(self.histvols.transpose()).transpose()-np.matmul(self.pca.components_,self.histvols)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>dates</expression-string>
+        <expression-string>np.matmul(self.pca.components_,self.histvols)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>max(full_dates,key=itemgetter(0))</expression-string>
+        <expression-string>self.pca.transform(self.histvols.transpose()).transpose()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>max(full_dates,key=itemgetter(0)))</expression-string>
+        <expression-string>self.pca.transform(self.histvols.transpose())</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.pca.transform(self.histvols)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.pca</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>sum(pnlcs[x][-1] for x in range(1,5))</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>sum(myBT.pos)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>mySurf.myvols[('pca187','normalizediv')]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -288,13 +418,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/lib/function_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="4693" selection-start-line="4693" selection-end-line="4693" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -309,13 +432,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="232">
@@ -323,10 +439,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_subplots.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="59">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cont_w.p">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/core/shape_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="293" lean-forward="true" selection-start-line="293" selection-end-line="293" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="242" selection-start-line="242" selection-end-line="242" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/matplotlib/axes/_axes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="2026" selection-start-line="2026" selection-end-line="2026" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pnl_explain1.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pnl_explain.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$USER_HOME$/anaconda3/lib/python3.6/site-packages/numpy/lib/function_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="2090" selection-start-line="2090" selection-end-line="2090" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="10" column="55" selection-start-line="10" selection-start-column="55" selection-end-line="10" selection-end-column="55" />
+          <caret line="10" column="56" selection-start-line="10" selection-start-column="56" selection-end-line="10" selection-end-column="56" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -338,8 +505,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/plots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
+        <state relative-caret-position="1141">
+          <caret line="117" column="98" selection-start-line="117" selection-start-column="98" selection-end-line="117" selection-end-column="98" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -348,10 +515,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="180" column="16" selection-start-line="180" selection-start-column="16" selection-end-line="180" selection-end-column="16" />
+        <state relative-caret-position="112">
+          <caret line="175" selection-start-line="175" selection-end-line="175" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Backtester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="146" column="33" lean-forward="true" selection-start-line="146" selection-start-column="33" selection-end-line="146" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
