@@ -1,5 +1,5 @@
 import numpy as np
-from scipy.stats import norm
+import pickle
 
 def gfunc(m,t,h1,h2):
     '''
