@@ -55,6 +55,7 @@ class VolSurf:
         self.h1 = h1
         self.h2 = h2
         self.pca = None
+        self.d1_mask = None
 
 
     def nwInterp(self,strike,mat,dat,diff=False):
@@ -114,15 +115,23 @@ class VolSurf:
         self.histvols = mysurface[1:]
         self.diff_dates = diff_dates
 
-    def get_pca(self,n : int, cov=True):
+    def get_pca(self,n : int, cov=True, slice=None):
         '''
         Compute an sklean pca object for the historical vol surface
         :param n: (int) Number of factors in PCA
         :param cov: (bool) If True, apply covatiance matric
+        :param slice: (tuple) Filter the data for 1D pca
+            format slice = ('moneyness',1.0) or ('maturity',0.328767123)
         :return: None
         '''
-        pca = PCA(n_components=n,svd_solver='arpack')
-        tempvols = np.diff(self.histvols,axis=1)/self.histvols[:,:-1]
+        pca = PCA(n_components=n)
+        if slice is not None:
+            axis = 0 if slice[0] == 'moneyness' else 1
+            self.d1_mask = [i for i in range(len(self.contracts)) if abs(self.contracts[i][axis] - slice[1]) < 0.01]
+            tempvols = self.histvols[self.d1_mask,:]
+        else:
+            tempvols = self.histvols
+        tempvols = np.diff(tempvols,axis=1)/tempvols[:,:-1]
         tempvols = (tempvols-np.mean(tempvols,axis=0))/np.std(tempvols,axis=0)
         if cov:
             tempvols = np.cov(tempvols)
@@ -162,6 +171,13 @@ class VolSurf:
             return np.matmul(self.pca.components_, np.diff(self.histvols,axis=1))
         return np.matmul(self.pca.components_,self.histvols)
 
+    def pca_num_factors(self):
+        '''
+        Returns the number of factors contained in the PCA
+        :return: (int) Number of factors in mySurf pca
+        '''
+        return self.pca.n_components_
+
 
 if __name__ == '__main__':
     print('Welcome to the Volatility Surfice PCA Demo!')
@@ -169,21 +185,24 @@ if __name__ == '__main__':
           ' These will appear in Sepereate Windows.\n')
     input("Press Enter to continue...")
     print('Computing...')
-    mySurf = VolSurf('data_download.csv',h1=0.1,h2=0.1)
-    pca_factors = 188; graph_scn = ['pca' + str(i) for i in range(pca_factors)]
-    mySurf.get_pca(pca_factors,cov=True)
+    mySurf = VolSurf('data_download_semi_clean.csv',h1=0.1,h2=0.1)
+    pca_factors = 6; graph_scn = ['pca' + str(i) for i in range(pca_factors)]
+    d1_slice = ('maturity',30/360)
+    mySurf.get_pca(pca_factors,cov=True, slice=d1_slice)
     mySurf.map_pca()
     print('Rendering Graphs...')
     title = ['PCA Factor ' + str(i) for i in range(1,pca_factors+1)]
-    colors = ['blue','orange','green','red']
-    plt_surf_mult(mySurf,graph_scn,title=title,color=colors)
+    colors = ['blue','orange','green','red', 'purple', 'grey']
+
+    plt_1dsurf_mult(mySurf, [0,1], d1_slice, color=colors, title=['1D Factor 1', '1D Factor 2'])
+    #plt_surf_mult(mySurf,graph_scn,title=title,color=colors)
     # for i in range(pca_factors): #Plot surfaces of volatility factors
     #     graph_scn = 'pca' + str(i)
     #     plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
     #
-    #plt_importance(mySurf) #Plot importance of each factor
+    # plt_importance(mySurf,4) #Plot importance of each factor
     #
     # plt_proj_time(mySurf,pca_factors,save=True,title='projected_factors.png') #Plot time series of factor magnitude
-    #plt_surf(mySurf, 'pca187', diff=False, save=True, title='Volatility Plot for Factor ' + str(188))
+    #plt_surf(mySurf, 'pca4', diff=False, save=True, title='Volatility Plot for Factor ' + str(5))
 
     print("Done!")
