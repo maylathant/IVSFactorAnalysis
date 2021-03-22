@@ -7,6 +7,7 @@ Launch the file "engine.py" to start the demo. You will see surface plots for th
 #### Note: Requires Python3
 
 ### Required Packages
+#### To install required packages, navigate to this project on your machine and type "pip install -r requirements.txt"
 - pandas==0.24.2
 - numpy==1.16.4
 - scikit-learn==0.19.1
