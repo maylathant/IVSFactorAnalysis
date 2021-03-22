@@ -186,23 +186,20 @@ if __name__ == '__main__':
     input("Press Enter to continue...")
     print('Computing...')
     mySurf = VolSurf('data_download_semi_clean.csv',h1=0.1,h2=0.1)
-    pca_factors = 6; graph_scn = ['pca' + str(i) for i in range(pca_factors)]
-    d1_slice = ('maturity',30/360)
-    mySurf.get_pca(pca_factors,cov=True, slice=d1_slice)
+    pca_factors = 4; graph_scn = ['pca' + str(i) for i in range(pca_factors)]
+    mySurf.get_pca(pca_factors)
     mySurf.map_pca()
     print('Rendering Graphs...')
     title = ['PCA Factor ' + str(i) for i in range(1,pca_factors+1)]
     colors = ['blue','orange','green','red', 'purple', 'grey']
 
-    plt_1dsurf_mult(mySurf, [0,1], d1_slice, color=colors, title=['1D Factor 1', '1D Factor 2'])
-    #plt_surf_mult(mySurf,graph_scn,title=title,color=colors)
-    # for i in range(pca_factors): #Plot surfaces of volatility factors
-    #     graph_scn = 'pca' + str(i)
-    #     plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
-    #
-    # plt_importance(mySurf,4) #Plot importance of each factor
-    #
-    # plt_proj_time(mySurf,pca_factors,save=True,title='projected_factors.png') #Plot time series of factor magnitude
-    #plt_surf(mySurf, 'pca4', diff=False, save=True, title='Volatility Plot for Factor ' + str(5))
+    plt_surf_mult(mySurf,graph_scn,title=title,color=colors)
+    for i in range(pca_factors): #Plot surfaces of volatility factors
+        graph_scn = 'pca' + str(i)
+        plt_surf(mySurf,graph_scn,diff=False,save=False,title='Volatility Plot for Factor ' + str(i+1))
+    
+    plt_importance(mySurf,4) #Plot importance of each factor
+    
+    plt_proj_time(mySurf,pca_factors,save=True,title='projected_factors.png') #Plot time series of factor magnitude
 
     print("Done!")
